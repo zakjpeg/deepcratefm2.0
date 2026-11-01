@@ -18,7 +18,7 @@ export const useLikedStore = create<LikedState>((set) => ({
     let newSongs = Array.isArray(songs) ? songs : [songs];
     newSongs = newSongs.filter(s => !state.liked.includes(s));
     return {
-        liked: [...state.liked, ...newSongs]
+        liked: [...newSongs.toReversed(), ...state.liked, ]
     }
   }),
   removeFromLiked: (songs) => set(state => {

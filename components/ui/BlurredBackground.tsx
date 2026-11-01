@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function BlurredBackground() {
     const {song} = usePlayerStore();
-    const currentSrc = song?.cover ?? "https://picsum.photos/200/300";
+    const currentSrc = song?.thumb ?? "https://picsum.photos/200/300";
 
     return (
         <AnimatePresence>
