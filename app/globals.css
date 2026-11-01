@@ -8,8 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter_tight);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +21,34 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:'Courier New', Courier, monospace
 }
+
+
+.boxy {
+  @apply bg-white/8 shadow-lg rounded-xl
+}
+
+.noselect {
+        user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
+}
+
+/* Keyframes for spin */
+/* globals.css */
+
+/* Define custom keyframes and animation using Tailwind’s @layer utilities */
+@layer utilities {
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .spin-slow {
+    animation: spin-slow 5s linear infinite;
+  }
+}
+
