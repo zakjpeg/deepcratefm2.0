@@ -11,7 +11,7 @@ import { FaBackward, FaForward, FaPause } from "react-icons/fa";
 import { IoMusicalNotesSharp } from "react-icons/io5";
 import { TbMetronome } from "react-icons/tb";
 
-export default function Player() {
+export default function PlayerTab() {
 
     const {song, setSong, clearSong, newSong} = usePlayerStore();
     const [seeDetails, setSeeDetails] = useState<boolean>(false);
@@ -27,7 +27,7 @@ export default function Player() {
     return (
         <div className="flex flex-col gap-0 w-fullmb-20">
           {song?.videos &&
-          <iframe width="560" height="315" src={getYTEmbedLink(song?.videos[0]?.uri)} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="rounded-2xl w-full"></iframe>
+          <iframe width="560" height="315" src={getYTEmbedLink(song?.videos[0]?.uri)} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="rounded-2xl w-full bg-black/50"></iframe>
           }
           <p className="mt-5 text-2xl font-bold line-clamp-1 text-ellipsis">{song?.title}</p>
           <p className="text-lg text-white/50 line-clamp-1 mb-1">{song?.artists_sort}</p>

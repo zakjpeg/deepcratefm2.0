@@ -12,17 +12,20 @@ export default function BlurredBackground() {
             <motion.div
             key={currentSrc}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ 
+                opacity: 1,
+                rotate: [-5, 0]
+            }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="z-0 noselect absolute inset-0 w-full h-full"
+            className="z-0 noselect fixed inset-0 w-screen h-screen"
             >
                 <Image 
                 src={currentSrc} 
                 width={1920} 
                 height={1080} 
                 alt="" 
-                className="w-full h-full object-cover blur-3xl opacity-30 scale-110" 
+                className="w-full h-full object-cover blur-3xl opacity-30 scale-110 saturate-200" 
                 />
             </motion.div>
         </AnimatePresence>

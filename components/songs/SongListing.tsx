@@ -39,45 +39,36 @@ export default function SongListing({
             )}
             onClick={() => setSong(song)}
         >
-            {song?.images && song?.images[0].uri ? (
-                <motion.img
-                    src={song?.images[0]?.uri}
-                    alt=""
-                    draggable={false}
-                    className="aspect-square w-15 h-15 object-cover select-none"
-                    animate={{
-                        borderRadius: isPlaying ? "50%" : "0.375rem",
-                        rotate: isPlaying ? [0, 180, 720] : 0,
-                    }}
-                    transition={
-                        isPlaying
-                            ? {
-                                borderRadius: { duration: 0.3 },
-                                rotate: {
-                                    duration: 4,
-                                    times: [0, 0.15, 1],
-                                    ease: ["easeIn", "linear"],
-                                    repeat: Infinity,
-                                    repeatType: "loop",
-                                },
-                            }
-                            : { duration: 0 }
-                    }
-                />
-            ) : (
-                <div
-                    className={clsx(
-                        "aspect-square w-15 h-15 object-cover select-none bg-white/50",
-                        isPlaying ? "rounded-full spin-slow" : "rounded-md",
-                    )}
-                />
-            )}
+            <motion.img
+                src={song?.images ? song?.images[0]?.uri : song?.thumb}
+                alt=""
+                draggable={false}
+                className="aspect-square w-15 h-15 object-cover select-none"
+                animate={{
+                    borderRadius: isPlaying ? "50%" : "0.375rem",
+                    rotate: isPlaying ? [0, 180, 720] : 0,
+                }}
+                transition={
+                    isPlaying
+                        ? {
+                            borderRadius: { duration: 0.3 },
+                            rotate: {
+                                duration: 4,
+                                times: [0, 0.15, 1],
+                                ease: ["easeIn", "linear"],
+                                repeat: Infinity,
+                                repeatType: "loop",
+                            },
+                        }
+                        : { duration: 0 }
+                }
+            />
 
             <div className="flex flex-col">
                 <p className="font-semibold text-sm text-white line-clamp-2 text-ellipsis">
                     {song.title}
                 </p>
-                <p className="text-xs line-clamp-1 text-ellipsis">{song.artists_sort}</p>
+                <p className="text-xs line-clamp-1 text-ellipsis">{song.artists_sort ?? song.artists[0].name}</p>
             </div>
             <div className="ml-auto mr-5 w-fit">
                 <div className="text-white">
