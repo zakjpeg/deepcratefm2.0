@@ -22,7 +22,7 @@ export default function BlurredBackground() {
                 width={1920} 
                 height={1080} 
                 alt="" 
-                className="w-full h-full object-cover blur-3xl opacity-25 scale-110" 
+                className="w-full h-full object-cover blur-3xl opacity-30 scale-110" 
                 />
             </motion.div>
         </AnimatePresence>

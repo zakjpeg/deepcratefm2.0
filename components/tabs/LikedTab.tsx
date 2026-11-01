@@ -17,6 +17,12 @@ export default function LikedTab() {
     return (
         <div className="flex flex-col gap-2">
             <p className="font-semibold">Liked Songs</p>
+
+            {/* Empty state */}
+            {staleLiked.length === 0 &&
+            <p className="opacity-50 font-light">You have no liked songs.</p>
+            }
+            
             <div className="flex flex-col gap-2 scrollbar-none">
             {staleLiked.map((song, index) => (
                 <SongListing key={song.id} song={song} expandOnHover={false}/>

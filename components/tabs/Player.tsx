@@ -26,7 +26,9 @@ export default function Player() {
 
     return (
         <div className="flex flex-col gap-0 w-fullmb-20">
+          {song?.videos &&
           <iframe width="560" height="315" src={getYTEmbedLink(song?.videos[0]?.uri)} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="rounded-2xl w-full"></iframe>
+          }
           <p className="mt-5 text-2xl font-bold line-clamp-1 text-ellipsis">{song?.title}</p>
           <p className="text-lg text-white/50 line-clamp-1 mb-1">{song?.artists_sort}</p>
           <p className={clsx(
@@ -36,7 +38,7 @@ export default function Player() {
           >{song?.notes}</p>
           <div className="mt-5 flex flex-row flex-wrap gap-10 justify-start items-center text-white/90">
           {
-            song?.genres[0] &&
+            song?.genres && song?.genres[0] &&
             <div className="flex flex-col">
               <p className="text-white/65">Style</p>
               <p className="flex flex-row gap-1 items-center font-semibold"><BiCategoryAlt /> {[song?.genres[0], ...song?.styles.slice(0, 2)].join(', ')}</p>
@@ -59,11 +61,10 @@ export default function Player() {
           </div>
 
           {/* Player Controls */}
-          <div className="absolute flex flex-row justify-evenly items-center px-3 bottom-0 left-0 rounded-t-2xl backdrop-blur-xl backdrop-brightness-160 w-full h-20 z-10 ">
+          <div className="absolute flex flex-row justify-evenly items-center px-3 bottom-0 left-0 backdrop-blur-xl backdrop-brightness-160 w-full h-20 z-10 ">
             {/* Current Song */}
             <Link href={song?.uri ?? '/'} target="_blank" className="hidden lg:flex flex-1 flex-row gap-4 left-4 h-14">
-
-              <img src={song?.images[0]?.uri} alt="" className="aspect-square h-full rounded-sm cursor-pointer object-cover shrink-0" />
+              <img src={song?.images ? song.images[0].uri : song?.thumb} alt="" className="aspect-square h-full rounded-sm cursor-pointer object-cover shrink-0" />
               <div className="flex flex-col justify-center cursor-pointer">
                 <p className="font-semibold text-wrap text-ellipsis line-clamp-2 leading-5">{song?.title}</p>
                 <p className="text-sm font-regular text-white/60 line-clamp-1 leading-5">{song?.artists_sort}</p>

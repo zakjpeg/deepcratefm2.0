@@ -84,7 +84,6 @@ const TRENDING_CATEGORIES = [
 //     },
 // ];
 
-const TRENDING_LIST = [];
 
 export default function Trending() {
     const [category, setCategory] = useState<string>(TRENDING_CATEGORIES[0].name ?? '');
@@ -113,11 +112,11 @@ export default function Trending() {
               ))
             }
             </div>
-            {
+            {/* {
               TRENDING_LIST.map((song) => (
                 <SongListing key={song.id} song={song}/>
               ))
-            }
+            } */}
 
 
         </div>

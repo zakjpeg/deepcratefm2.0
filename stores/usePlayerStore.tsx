@@ -14,7 +14,7 @@ interface PlayerState {
 
 export const usePlayerStore = create<PlayerState>((set) => ({
   song: null,
-  setSong: (inSong) => {
+  setSong: (inSong, updateRecent = true) => {
     set({ song: inSong })
     if (inSong) {
       // Add to recent songs
