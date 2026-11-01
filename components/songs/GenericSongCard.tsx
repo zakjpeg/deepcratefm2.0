@@ -47,7 +47,7 @@ export default function GenericSongCard({
                 src={song?.images ? song?.images[0]?.uri : song?.thumb}
                 alt=""
                 draggable={false}
-                className="absolute inset-0 translate-y-11/10 brightness-35 blur-lg saturate-200 scale-200 aspect-square w-full object-cover select-none"
+                className="absolute left-0 -bottom-5/10 blur-xl scale-x-200 brightness-35 saturate-200 aspect-square w-full h-full object-cover select-none"
             />
 
             <div className="absolute inset-0 border-[2px] border-white/25 rounded-lg mix-blend-overlay"/>
