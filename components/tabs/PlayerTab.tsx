@@ -4,7 +4,7 @@ import { usePlayerStore } from "@/stores/usePlayerStore";
 import getYTEmbedLink from "@/util/youtube/getYTEmbedLink";
 import clsx from "clsx";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiTwotoneCalendar } from "react-icons/ai";
 import { BiCategoryAlt, BiWorld } from "react-icons/bi";
 import { FaBackward, FaForward, FaPause } from "react-icons/fa";
@@ -24,10 +24,42 @@ export default function PlayerTab() {
       await newSong();
     }
 
+    if (!song) {
+      return (
+        <div className="flex flex-col gap-0 w-full mb-20">
+            <div className="relative rounded-2xl w-full bg-black h-[315px] flex flex-col justify-center items-start px-16 overflow-hidden max-md:px-6">
+              <div className="absolute inset-0 w-full h-full blur-2xl saturate-200 brightness-150">
+                <div className="absolute w-full h-full bottom-0 left-0 bg-linear-5 from-emerald-500 opacity-50 to-transparent to-50% z-0"/>
+                <div className="blur-lg absolute right-1/4 top-1/2 -translate-y-1/2 w-50 h-50 bg-radial from-amber-800 to-transparent to-75%"/>
+              </div>
+              <p className="font-semibold text-3xl z-1">Discover music</p>
+              <p className="font-light text-lg z-1">Enter a randomly generated algorithm</p>
+              <div className="my-2" />
+              <button
+              className="font-semibold text-lg px-4 py-1 bg-emerald-800 rounded-full cursor-pointer hover:brightness-90 transition-all z-1"
+              onClick={handleNewSong}
+              >
+                Start
+              </button>
+            </div>
+        </div>
+      )
+    }
+
     return (
-        <div className="flex flex-col gap-0 w-fullmb-20">
+        <div className="flex flex-col gap-0 w-full mb-20">
           {song?.videos &&
-          <iframe width="560" height="315" src={getYTEmbedLink(song?.videos[0]?.uri)} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="rounded-2xl w-full bg-black/50"></iframe>
+          <iframe 
+            width="560"
+            height="315" 
+            src={getYTEmbedLink(song?.videos[0]?.uri)} 
+            title="YouTube video player" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerPolicy="strict-origin-when-cross-origin" 
+            allowFullScreen
+            className="rounded-2xl w-full bg-black/50" 
+          />
           }
           <p className="mt-5 text-2xl font-bold line-clamp-1 text-ellipsis">{song?.title}</p>
           <p className="text-lg text-white/50 line-clamp-1 mb-1">{song?.artists_sort}</p>

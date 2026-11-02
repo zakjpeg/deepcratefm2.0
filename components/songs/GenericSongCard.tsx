@@ -5,33 +5,53 @@ import { usePlayerStore } from "@/stores/usePlayerStore";
 import { Song } from "@/types/song";
 import clsx from "clsx";
 import { motion } from "motion/react";
-import Image from "next/image";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 export default function GenericSongCard({
     song,
+    loading = false,
 }: {
-    song: Song;
+    song?: Song;
+    loading?: boolean;
 }) {
     const { song: playerSong, setSong, clearSong } = usePlayerStore();
     const { liked, addToLiked, removeFromLiked } = useLikedStore();
 
-    if (!song) {
+    // Empty State
+    if (loading) {
+        return (
+        <motion.div
+        animate={{
+            opacity: [0.75, 1, 0.75]
+        }}
+        transition={{
+            repeat: Infinity,
+            duration: 2,
+            ease: "easeInOut"
+        }}
+        className={clsx(
+            "w-full h-full rounded-lg bg-neutral-900 shadow-xl",
+        )}
+        />
+        )
+    }
+
+    // Error State
+    if (!song || !song.title) {
         return null;
     }
 
+    // Success State
     const isPlaying = playerSong === song;
     const isLiked = liked.includes(song);
 
-    if (!song.title) {
-        return null;
-    }
-
     return (
-        <div
+        <motion.div
+            animate={{
+                opacity: [0, 1]
+            }}
             key={song.title}
             className={clsx(
-                "p-3 overflow-hidden relative w-full h-full flex flex-col justify-end gap-2 rounded-lg cursor-pointer text-white/50 hover:text-white/75 hover:bg-white/10 transition-all hover:scale-103",
+                "p-3 overflow-hidden shadow-xl relative w-full h-full flex flex-col justify-end gap-2 rounded-lg cursor-pointer text-white/50 hover:text-white/75 hover:bg-white/10 transition-all hover:scale-103",
                 isPlaying && "bg-white/10",
             )}
             onClick={() => setSong(song)}
@@ -61,6 +81,6 @@ export default function GenericSongCard({
                 </p>
             </div>
 
-        </div>
+        </motion.div>
     );
 }
