@@ -38,8 +38,6 @@ export async function getSearchRelease() {
     const url = new URL("https://api.discogs.com/database/search");
     // ZAK TODO: Refine the search queries
     url.searchParams.append("type", "release");
-    url.searchParams.append("genre", "Hip Hop");
-    url.searchParams.append("year", "1999");
     url.searchParams.append("country", "us");
     url.searchParams.append("token", DISCOGS_TOKEN)
     try {
@@ -55,11 +53,11 @@ export async function getSearchRelease() {
             throw new Error(`${response.status} ${response.statusText}`)
         }
 
-        // Log data in file
         const data = await response.json();
-        fs.appendFile('applog.ts', JSON.stringify(data), (err) => {
-            if (err) console.error('Failed to write log:', err);
-        });
+        // Log data in file
+        // fs.appendFile(JSON.stringify(data), (err) => {
+        //     if (err) console.error('Failed to write log:', err);
+        // });
         
         const release = await getReleaseById(data.results[Math.floor(Math.random() * data.results.length)].id);
         console.log(data.results.length);
